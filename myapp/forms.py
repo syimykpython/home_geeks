@@ -28,3 +28,11 @@ class CommentForm(forms.ModelForm):
         widgets = {
             'text': forms.Textarea(attrs={'rows': 2}),
         }
+name = image.name.split(".")[-1]
+        if name not in ["jpg", "jpeg"]:
+            raise forms.ValidationError("Only .jpg and .jpeg images are allowed")
+        return image
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(label="Search", required=False)

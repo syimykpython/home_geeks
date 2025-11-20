@@ -30,7 +30,16 @@ def post_detail(request, post_id):
         'comment_form': comment_form,
     })
 
-
+@login_required(login_url='/login/')
+def posts_list_view(request):
+    posts = Post.objects.all()
+    form = SearchForm()
+    if request.methon == "GET":
+        query_params = request.GET
+        search = query_params.get("search")
+        category_id = query_params.get("category_id")
+        
+        
 
 # def post_create_form(request):
 #     if request.method == 'POST':
@@ -57,4 +66,5 @@ def post_create_modelform(request):
             return redirect('post_list')
     else:
         form = PostModelForm()
-    return render(request, 'myapp/post_create.html', {'form': form, 'title': 'Создание поста (ModelForm)'})
+    return render(request, 'myapp/post_create.html', {'form': form, 'title': 'Создание поста'' (ModelForm)'})
+    
